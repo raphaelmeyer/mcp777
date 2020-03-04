@@ -1,5 +1,7 @@
 # MCP 777
 
+[![Build Status](https://travis-ci.com/raphaelmeyer/mcp777.svg?branch=master)](https://travis-ci.com/raphaelmeyer/mcp777)
+
 Copy assets/mcp777.xml to ${FG_ROOT}/Protocol/
 
 Start fgfs
