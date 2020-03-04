@@ -1,0 +1,23 @@
+#!/bin/bash
+
+script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+project_dir="$( realpath "${script_dir}/.." )"
+
+workspace="${WORKSPACE:-${project_dir}}"
+
+build_dir="${workspace}/_build"
+inst_dir="${workspace}/_inst"
+
+export CC="${CC:-clang}"
+export CXX="${CXX:-clang++}"
+
+if [ ! -d "${build_dir}" ] ; then
+    mkdir -p "${build_dir}"
+fi
+
+if [ ! -f "${build_dir}/build.ninja" ] ; then
+    cd "${build_dir}"
+    cmake "${project_dir}" -G "Ninja" -DCMAKE_INSTALL_PREFIX="${inst_dir}"
+fi
+
+cmake --build "${build_dir}"
