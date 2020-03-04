@@ -10,6 +10,6 @@ script:
     --mount type=volume,source=workspace,destination=/workspace
     --mount type=bind,source=$TRAVIS_BUILD_DIR,destination=/source,readonly
     -e WORKSPACE='/workspace'
-    raphaelmeyer/arch-clang-ninja /source/build
+    raphaelmeyer/arch-clang-ninja /source/scripts/build
 after_script:
   - docker volume rm workspace
