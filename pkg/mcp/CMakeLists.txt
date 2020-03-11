@@ -21,6 +21,7 @@ target_link_libraries(test_mcp
   PRIVATE
     mcp777::mcp
     doctest::doctest
+    trompeloeil
     compiler::settings
     Threads::Threads
 )

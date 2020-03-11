@@ -27,5 +27,18 @@
        </chunk>
 
    </output>
+
+   <input>
+      <line_separator>newline</line_separator>
+      <var_separator>;</var_separator>
+
+      <chunk>
+         <name>HDG</name>
+         <node>/autopilot/settings/heading-bug-deg</node>
+         <type>int</type>
+      </chunk>
+
+   </input>
+
 </generic>
 </PropertyList>

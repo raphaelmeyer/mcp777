@@ -1,5 +1,6 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include <doctest/doctest.h>
+#include <doctest/trompeloeil.hpp>
 
 #include <mcp/mcp777.h>
 
@@ -9,20 +10,29 @@
 namespace
 {
 
-TEST_CASE("when shutdown() is called then MCP is stopped within a few seconds")
+class seven_segment_mock
 {
-    const auto testee = std::make_unique<mcp::mcp777>();
+public:
+    MAKE_MOCK1(set, void(std::array<std::byte, 4>));
+};
 
-    testee->start();
+SCENARIO("Display heading" * doctest::should_fail())
+{
+    GIVEN("heading is set to 157")
+    {
+        seven_segment_mock display;
 
-    auto exited = std::async(std::launch::async, [&] {
+        const auto testee = std::make_unique<mcp::mcp777>();
+        testee->start();
+
+        THEN("Heading Select should display HDG 157")
+        {
+            REQUIRE_CALL(display, set(trompeloeil::_))
+                .TIMES(AT_LEAST(1));
+        }
+
         testee->shutdown();
-    });
-
-    auto const result = exited.wait_for(std::chrono::seconds{1});
-    CHECK(result == std::future_status::ready);
-
-    exited.get();
+    }
 }
 
 } // namespace
