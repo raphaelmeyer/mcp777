@@ -7,6 +7,9 @@
 namespace mcp
 {
 
+mcp777::mcp777(std::shared_ptr<io::seven_segment const> heading_select)
+    : _heading_select{heading_select} {}
+
 void mcp777::start()
 {
     /* spike

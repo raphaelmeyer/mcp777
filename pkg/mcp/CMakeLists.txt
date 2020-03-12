@@ -8,6 +8,7 @@ target_include_directories(mcp PUBLIC src)
 target_link_libraries(mcp
   PRIVATE
     mcp777::net
+    mcp777::io
     compiler::settings
 )
 
@@ -20,9 +21,12 @@ add_executable(tests::mcp ALIAS test_mcp)
 target_link_libraries(test_mcp
   PRIVATE
     mcp777::mcp
+    mcp777::io
+ 
+    compiler::settings
+ 
     doctest::doctest
     trompeloeil
-    compiler::settings
     Threads::Threads
 )
 add_custom_target(run_mcp_tests ALL COMMAND tests::mcp)
