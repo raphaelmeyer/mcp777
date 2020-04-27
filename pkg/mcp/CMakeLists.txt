@@ -29,4 +29,4 @@ target_link_libraries(test_mcp
     trompeloeil
     Threads::Threads
 )
-add_custom_target(run_mcp_tests ALL COMMAND tests::mcp)
+add_custom_target(run_mcp_tests ALL COMMAND tests::mcp -fc -s)

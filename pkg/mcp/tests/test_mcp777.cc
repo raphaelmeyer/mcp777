@@ -20,15 +20,37 @@ public:
 
 SCENARIO("Display heading" * doctest::should_fail())
 {
-    GIVEN("heading is set to 157")
+    GIVEN("a 4 digit 7 segment display for Heading Select")
     {
+        // TODO
+        // replace seven_segment_mock with spy
+        // in order to check state instead of
+        // interaction
         auto const display = std::make_shared<seven_segment_mock>();
         auto const testee = std::make_unique<mcp::mcp777>(display);
 
-        THEN("Heading Select should display HDG 157")
+        WHEN("there is an update event with Heading 157")
         {
-            REQUIRE_CALL(*display, set())
-                .TIMES(AT_LEAST(1));
+            // send event {Mode: HDG, Angle: 157}
+
+            THEN("the top segment of the left most digit should be on to indicate Mode Heading")
+            {
+                // TODO check left digit -> A on, other off
+
+                AND_THEN("the 3 digits to the right should display 1 5 7")
+                {
+                    // TODO replace
+                    REQUIRE_CALL(*display, set())
+                        .TIMES(AT_LEAST(1));
+
+                    // check other digits
+                }
+            }
+        }
+
+        WHEN("there is an update event with Tracking 243")
+        {
+            // ...
         }
     }
 }
